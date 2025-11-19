@@ -15,9 +15,6 @@ if [ ! -f .env ]; then
     fi
 fi
 
-# ファイルのパーミッション設定
-chmod +x scripts/*.sh
-
 # 古いDockerイメージのクリーンアップ
 docker system prune -af --volumes || true
 
