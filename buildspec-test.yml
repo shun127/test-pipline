@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "Pre-test phase started on `date`"
       - echo "Installing dependencies..."
-      - npm ci
+      - npm install
 
   build:
     commands:
