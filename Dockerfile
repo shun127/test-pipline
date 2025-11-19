@@ -2,12 +2,6 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# パッケージファイルをコピー
-COPY package*.json ./
-
-# 依存関係のインストール
-RUN npm install --production
-
 # アプリケーションコードをコピー
 COPY . .
 
@@ -15,4 +9,4 @@ COPY . .
 EXPOSE 3000
 
 # アプリケーション起動
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
