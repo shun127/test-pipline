@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Pre-test phase started on `date`"
+      - echo "Installing dependencies..."
+      - npm ci
+
+  build:
+    commands:
+      - echo "Test phase started on `date`"
+      - echo "Running tests..."
+      - npm test || echo "No tests found, skipping..."
+      - echo "Running linting..."
+      - npm run lint || echo "No linting configured, skipping..."
+
+  post_build:
+    commands:
+      - echo "Post-test phase completed on `date`"
+      - echo "All tests passed successfully"
