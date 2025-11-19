@@ -1,0 +1,35 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Pre-build phase started on `date`"
+      - echo "Logging into Docker..."
+      - docker --version
+
+  build:
+    commands:
+      - echo "Build phase started on `date`"
+      - echo "Building Docker image..."
+      - docker build -t myapp:latest .
+      - echo "Docker image built successfully"
+
+  post_build:
+    commands:
+      - echo "Post-build phase started on `date`"
+      - echo "Preparing deployment artifacts..."
+      - mkdir -p artifacts
+      - cp Dockerfile artifacts/
+      - cp docker-compose.yml artifacts/
+      - cp appspec.yml artifacts/
+      - cp -r scripts artifacts/
+      - cp -r nginx artifacts/ || echo "No nginx directory found"
+      - cp init-db.sql artifacts/ || echo "No init-db.sql found"
+      - cp server.js artifacts/ || echo "No server.js found"
+      - echo "Build completed on `date`"
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: artifacts
+  name: BuildOutput
